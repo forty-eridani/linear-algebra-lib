@@ -9,13 +9,24 @@ typedef struct {
 } Vector;
 
 // Initialize a vector with the given elements
-Vector InitVector(const double* elements, int size);
+Vector CreateVector(const double* elements, int size);
+
+// .data field in struct will be initialized with given memory address; ensure
+// object is in scope for less than or equal to the time that elements are in scope
+// and avoid freeing 
+Vector CreateVectorWithElements(double* elements, int size);
 
 // Creates a new vector and so allocated heap memory; must be freed eventually
-Vector AddVectors(Vector* v1, Vector* v2);
+Vector AddVectors(Vector v1, Vector v2);
+
+// Adds vectors in place and stores the result in the right vector
+void AddVectorsInPlace(Vector v1, Vector* v2);
 
 // Returns a new vector with the scalar applied
-Vector ApplyScalarToVector(Vector* vector, double scalar);
+Vector ApplyScalarToVector(Vector vector, double scalar);
+
+// Applies a scalar to a vector and stores the result in place
+void ApplyScalarToVectorInPlace(Vector* vector, double scalar);
 
 // Prints all of the elements of a vector in column form
 void PrintVector(Vector vector);

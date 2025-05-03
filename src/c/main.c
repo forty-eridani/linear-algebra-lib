@@ -1,27 +1,14 @@
-#include <stdio.h>
-
 #include "matrix.h"
 
+#include <stdlib.h>
+
 int main() {
-	const double a1[] = {
-		1, 2, 3,
-		4, 5, 6,
+	double matrixData[] = {
+		1.2, 1.3, 1.4,
+		1.6, 2.1, 4.3
 	};
 
-	const double a2[] = {
-		1, 2, 3,
-		4, 5, 6,
-		7, 8, 9
-	};
+	Matrix m = CreateMatrixWithElements(NULL, 2, 3);
 
-	Matrix m1 = CreateMatrix(a1, 2, 3);
-	Matrix m2 = CreateMatrix(a2, 3, 3);
-
-	Matrix product = MultiplyMatrices(m1, m2);
-
-	PrintMatrix(product);
-
-	FreeMatrix(&m1);
-	FreeMatrix(&m2);
-	FreeMatrix(&product);
+	PrintMatrix(m);
 }

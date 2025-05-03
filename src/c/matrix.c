@@ -1,5 +1,6 @@
 #include "matrix.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,7 +11,10 @@ static int getMatrixIndex(Matrix m, int row, int col) {
 	return row * m.cols + col;
 }
 
+// You could memset all to zero, but a double is not guaranteed to use IEEE 754
 static void setZero(int size, double* data) {
+	assert(data);
+
 	for (int i = 0; i < size; i++)
 		data[i] = 0.0;
 }
@@ -27,7 +31,16 @@ Matrix CreateMatrix(const double* data, int rows, int cols) {
 	return matrix;
 }
 
+Matrix CreateMatrixWithElements(double* data, int rows, int cols) {
+	assert(data);
+
+	return (Matrix){.data = data, .rows = rows, .cols = cols};
+}
+
 Matrix MultiplyMatrices(Matrix left, Matrix right) {
+	assert(left.data);
+	assert(right.data);
+
 	if (left.cols != right.rows) {
 		printf("Invalid matrix dimensions for multiplication.\n");
 		return EMPTY_MATRIX;
@@ -52,6 +65,9 @@ Matrix MultiplyMatrices(Matrix left, Matrix right) {
 }
 
 Vector MultiplyMatrixToVector(Matrix matrix, Vector vector) {
+	assert(matrix.data);
+	assert(vector.data);
+
 	if (matrix.cols != vector.size) {
 		printf("Incompatible vector size of %d and matrix width of %d.\n", vector.size, matrix.cols);
 		return EMPTY_VECTOR;
@@ -71,7 +87,34 @@ Vector MultiplyMatrixToVector(Matrix matrix, Vector vector) {
 	return product;
 }
 
+// Technically not "in place" but I don't care
+void MultiplyMatrixToVectorInPlace(Matrix matrix, Vector* vector) {
+	assert(vector);
+	assert(vector->data);
+	assert(matrix.data);
+
+	if (matrix.cols != vector->size || matrix.rows != vector->size) {
+		printf("Cannot multiply matrix of uneven dimensions to vector in place.\n");
+		return;
+	}
+
+	double buf[vector->size];
+	setZero(vector->size, buf);
+
+	for (int i = 0; i < vector->size; i++) {
+		for (int j = 0; j < matrix.rows; j++) {
+			int matrixIndex = getMatrixIndex(matrix, j, i);
+			buf[j] += vector->data[i] * matrix.data[matrixIndex];
+		}
+	}
+
+	memcpy(vector->data, buf, vector->size * sizeof(double));
+}
+
 Matrix AddMatrices(Matrix left, Matrix right) {
+	assert(left.data);
+	assert(right.data);
+
 	if (left.rows != right.rows || left.cols != right.cols) {
 		printf("Cannot add matrices of different dimensions.\n");
 		return EMPTY_MATRIX;
@@ -86,7 +129,24 @@ Matrix AddMatrices(Matrix left, Matrix right) {
 	return sum;
 }
 
+void AddMatricesInPlace(Matrix left, Matrix* right) {
+	assert(left.data);
+	assert(right);
+	assert(right->data);
+
+	if (left.rows != right->rows || left.cols != right->cols) {
+		printf("Cannot add matrices of different dimensions.\n");
+		return;
+	}
+
+	for (int i = 0; i < left.rows * left.cols; i++) {
+		right->data[i] += left.data[i];
+	}
+}
+
 Matrix ApplyScalarToMatrix(Matrix matrix, double scalar) {
+	assert(matrix.data);
+
 	Matrix result = {.cols = matrix.cols, .rows = matrix.rows, .data = malloc(matrix.rows * matrix.cols * sizeof(double))};
 
 	for (int i = 0; i < matrix.cols * matrix.rows; i++) {
@@ -96,7 +156,18 @@ Matrix ApplyScalarToMatrix(Matrix matrix, double scalar) {
 	return result;
 }
 
+void ApplyScalarToMatrixInPlace(Matrix* matrix, double scalar) {
+	assert(matrix);
+	assert(matrix->data);
+
+	for (int i = 0; i < matrix->cols * matrix->rows; i++) {
+		matrix->data[i] *= scalar;
+	}
+}
+
 void PrintMatrix(Matrix matrix) {
+	assert(matrix.data);
+
 	for (int i = 0; i < matrix.rows; i++) {
 		printf("[");
 		for (int j = 0; j < matrix.cols - 1; j++) {
@@ -107,6 +178,8 @@ void PrintMatrix(Matrix matrix) {
 }
 
 void FreeMatrix(Matrix* matrix) {
+	assert(matrix);
+
 	matrix->rows = 0;
 	matrix->cols = 0;
 

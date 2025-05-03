@@ -1,10 +1,11 @@
 #include "vector.h"
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-Vector InitVector(const double* elements, int size) {
+Vector CreateVector(const double* elements, int size) {
 	Vector vector;
 
 	vector.data = malloc(size * sizeof(double));
@@ -15,34 +16,65 @@ Vector InitVector(const double* elements, int size) {
 	return vector;
 }
 
-Vector AddVectors(Vector* v1, Vector* v2) {
-	if (v1->size != v2->size) {
+Vector CreateVectorWithElements(double* elements, int size) {
+	assert(elements);
+
+	return (Vector){.data = elements, .size = size};
+}
+
+Vector AddVectors(Vector v1, Vector v2) {
+	assert(v1.data);
+	assert(v2.data);
+
+	if (v1.size != v2.size) {
 		printf("Cannot add vectors of different sizes.\n");
 		return EMPTY_VECTOR;
 	}
 
-	Vector sum = {.size = v1->size, .data= malloc(v1->size * sizeof(double))};
+	Vector sum = {.size = v1.size, .data= malloc(v1.size * sizeof(double))};
 
-	for (int i = 0; i < v1->size; i++) {
-		sum.data[i] = v1->data[i] + v2->data[i];
+	for (int i = 0; i < v1.size; i++) {
+		sum.data[i] = v1.data[i] + v2.data[i];
 	}
 
 	return sum;
 }
 
-Vector ApplyScalar(Vector* vector, double scalar) {
-	Vector result = InitVector(vector->data, vector->size);
+void AddVectorsInPlace(Vector v1, Vector* v2) {
+	assert(v1.data);
+	assert(v2);
+	assert(v2->data);
 
-	for (int i = 0; i < vector->size; i++) {
+	for (int i = 0; i < v1.size; i++) {
+		v2->data[i] += v1.data[i];
+	}
+}
+
+Vector ApplyScalar(Vector vector, double scalar) {
+	assert(vector.data);
+
+	Vector result = CreateVector(vector.data, vector.size);
+
+	for (int i = 0; i < vector.size; i++) {
 		result.data[i] *= scalar;
 	}
 
 	return result;
 }
 
+void ApplyScalarToVectorInPlace(Vector* vector, double scalar) {
+	assert(vector);
+	assert(vector->data);
+
+	for (int i = 0; i < vector->size; i++)
+		vector->data[i] *= scalar;
+}
+
 void PrintVector(Vector vector) {
 	if (vector.size == 0)
 		return;
+
+	assert(vector.data);
 
 	for (int i = 0; i < vector.size; i++) {
 		printf("[%f]\n", vector.data[i]);
