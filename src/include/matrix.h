@@ -25,6 +25,9 @@ Matrix AddMatrices(Matrix left, Matrix right);
 // Returns the matrix with the applied scalar
 Matrix ApplyScalarToMatrix(Matrix matrix, double scalar);
 
+// Prints the given matrix to stdout
+void PrintMatrix(Matrix matrix);
+
 // Frees dynamically allocated memory inside of a matrix
 void FreeMatrix(Matrix* matrix);
 

@@ -72,11 +72,38 @@ Vector MultiplyMatrixToVector(Matrix matrix, Vector vector) {
 }
 
 Matrix AddMatrices(Matrix left, Matrix right) {
+	if (left.rows != right.rows || left.cols != right.cols) {
+		printf("Cannot add matrices of different dimensions.\n");
+		return EMPTY_MATRIX;
+	}
 
+	Matrix sum = {.cols = left.cols, .rows = left.rows, .data = malloc(left.rows * left.cols * sizeof(double))};
+
+	for (int i = 0; i < left.rows * left.cols; i++) {
+		sum.data[i] = left.data[i] + right.data[i];
+	}
+
+	return sum;
 }
 
 Matrix ApplyScalarToMatrix(Matrix matrix, double scalar) {
+	Matrix result = {.cols = matrix.cols, .rows = matrix.rows, .data = malloc(matrix.rows * matrix.cols * sizeof(double))};
 
+	for (int i = 0; i < matrix.cols * matrix.rows; i++) {
+		result.data[i] = scalar * matrix.data[i];
+	}
+
+	return result;
+}
+
+void PrintMatrix(Matrix matrix) {
+	for (int i = 0; i < matrix.rows; i++) {
+		printf("[");
+		for (int j = 0; j < matrix.cols - 1; j++) {
+			printf("%f, ", matrix.data[getMatrixIndex(matrix, i, j)]);
+		}
+		printf("%f]\n", matrix.data[getMatrixIndex(matrix, i, matrix.cols - 1)]);
+	}
 }
 
 void FreeMatrix(Matrix* matrix) {

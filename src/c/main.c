@@ -19,12 +19,9 @@ int main() {
 
 	Matrix product = MultiplyMatrices(m1, m2);
 
-	for (int i = 0; i < 6; i++) {
-		if (i % 3 == 0)
-			printf("\n");
+	PrintMatrix(product);
 
-		printf("%f ", product.data[i]);
-	}
-
-	printf("\n");
+	FreeMatrix(&m1);
+	FreeMatrix(&m2);
+	FreeMatrix(&product);
 }
