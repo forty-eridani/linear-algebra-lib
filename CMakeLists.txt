@@ -20,8 +20,12 @@ set(BUILD_LIBRARY ON)
 if(BUILD_EXECUTABLE)
 	add_executable(${EXECUTABLE_NAME} ${COMPILE_DIR}/main.c
 									  ${SOURCE_FILES})
+	
+	target_link_libraries(${EXECUTABLE_NAME} PUBLIC m)
 endif()
 
 if(BUILD_LIBRARY)
 	add_library(linear-algebra ${SOURCE_FILES})
+
+	target_link_libraries(linear-algebra PUBLIC m)
 endif()

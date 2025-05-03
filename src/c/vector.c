@@ -1,6 +1,8 @@
 #include "vector.h"
+#include <stdlib.h>
 
 #include <assert.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,6 +70,17 @@ void ApplyScalarToVectorInPlace(Vector* vector, double scalar) {
 
 	for (int i = 0; i < vector->size; i++)
 		vector->data[i] *= scalar;
+}
+
+double ComputeNorm(Vector vector) {
+	assert(vector.data);
+
+	double sum = 0;
+
+	for (int i = 0; i < vector.size; i++)
+		sum += vector.data[i] * vector.data[i];
+
+	return sqrt(sum);
 }
 
 void PrintVector(Vector vector) {

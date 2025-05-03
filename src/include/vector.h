@@ -28,6 +28,8 @@ Vector ApplyScalarToVector(Vector vector, double scalar);
 // Applies a scalar to a vector and stores the result in place
 void ApplyScalarToVectorInPlace(Vector* vector, double scalar);
 
+double ComputeNorm(Vector vector);
+
 // Prints all of the elements of a vector in column form
 void PrintVector(Vector vector);
 
