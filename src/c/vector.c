@@ -24,6 +24,18 @@ Vector CreateVectorWithElements(double* elements, int size) {
 	return (Vector){.data = elements, .size = size};
 }
 
+double VectorSum(Vector v) {
+	assert(v.data);
+
+	double sum = 0.0;
+
+	for (int i = 0; i < v.size; i++) {
+		sum += v.data[i];
+	}
+
+	return sum;
+}
+
 Vector AddVectors(Vector v1, Vector v2) {
 	assert(v1.data);
 	assert(v2.data);

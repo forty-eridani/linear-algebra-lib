@@ -16,6 +16,9 @@ Vector CreateVector(const double* elements, int size);
 // and avoid freeing 
 Vector CreateVectorWithElements(double* elements, int size);
 
+// Computes the sum of all elements in the vector
+double VectorSum(Vector v);
+
 // Creates a new vector and so allocated heap memory; must be freed eventually
 Vector AddVectors(Vector v1, Vector v2);
 
