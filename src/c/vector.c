@@ -52,6 +52,72 @@ void AddVectorsInPlace(Vector v1, Vector* v2) {
 	}
 }
 
+Vector SubtractVectors(Vector v1, Vector v2) {
+	assert(v1.data);
+	assert(v2.data);
+
+	if (v1.size != v2.size) {
+		printf("Cannot find difference of vectors with different sizes.\n");
+		return EMPTY_VECTOR;
+	}
+
+	Vector difference = {.size = v1.size, .data = malloc(v1.size * sizeof(double))};
+
+	for (int i = 0; i < v1.size; i++) {
+		difference.data[i] = v1.data[i] - v2.data[i];
+	}
+
+	return difference;
+}
+
+void SubtractVectorsInPlace(Vector v1, Vector* v2) {
+	assert(v1.data);
+	assert(v2);
+	assert(v2->data);
+
+	if (v1.size != v2->size) {
+		printf("Cannot find difference of vectors with different sizes.\n");
+		return;
+	}
+
+	for (int i = 0; i < v1.size; i++) {
+		v2->data[i] -= v1.data[i];
+	}
+}
+
+Vector MultiplyVectors(Vector v1, Vector v2) {
+	assert(v1.data);
+	assert(v2.data);
+
+	if (v1.size != v2.size) {
+		printf("Cannot find product of vectors with different sizes.\n");
+		return EMPTY_VECTOR;
+	}
+
+	Vector product = {.size = v1.size, .data = malloc(v1.size * sizeof(double))};
+
+	for (int i = 0; i < v1.size; i++) {
+		product.data[i] = v1.data[i] * v2.data[i];
+	}
+
+	return product;
+}
+
+void MultiplyVectorsInPlace(Vector v1, Vector* v2) {
+	assert(v1.data);
+	assert(v2);
+	assert(v2->data);
+
+	if (v1.size != v2->size) {
+		printf("Cannot find product of vectors with different sizes.\n");
+		return;
+	}
+
+	for (int i = 0; i < v1.size; i++) {
+		v2->data[i] *= v1.data[i];
+	}
+}
+
 Vector ApplyScalar(Vector vector, double scalar) {
 	assert(vector.data);
 

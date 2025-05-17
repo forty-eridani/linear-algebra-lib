@@ -22,6 +22,18 @@ Vector AddVectors(Vector v1, Vector v2);
 // Adds vectors in place and stores the result in the right vector
 void AddVectorsInPlace(Vector v1, Vector* v2);
 
+// Finds the difference of two vectors and returns a new difference vector
+Vector SubtractVectors(Vector v1, Vector v2);
+
+// Finds the difference of two vectors and stores the difference in the second vector
+void SubtractVectorsInPlace(Vector v1, Vector* v2);
+
+// Finds the product of each element of each vector. Not dot or cross product
+Vector MultiplyVectors(Vector v1, Vector v2);
+
+// Finds the product of each elements of each vector and stores result in `v2`. Not dot or cross product.
+void MultiplyVectorsInPlace(Vector v1, Vector* v2);
+
 // Returns a new vector with the scalar applied
 Vector ApplyScalarToVector(Vector vector, double scalar);
 
