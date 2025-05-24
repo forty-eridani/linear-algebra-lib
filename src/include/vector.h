@@ -19,6 +19,12 @@ Vector CreateVectorWithElements(double* elements, int size);
 // Computes the sum of all elements in the vector
 double VectorSum(Vector v);
 
+// Returns the largest element in a vector
+double VectorMax(Vector v);
+
+// Add `x` to each element of vector `v`
+void AddToVector(Vector v, double x);
+
 // Creates a new vector and so allocated heap memory; must be freed eventually
 Vector AddVectors(Vector v1, Vector v2);
 
@@ -43,6 +49,7 @@ Vector ApplyScalarToVector(Vector vector, double scalar);
 // Applies a scalar to a vector and stores the result in place
 void ApplyScalarToVectorInPlace(Vector* vector, double scalar);
 
+// Computes the norm (distance) of a given vector
 double ComputeNorm(Vector vector);
 
 // Prints all of the elements of a vector in column form

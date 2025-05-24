@@ -11,5 +11,8 @@ int main() {
 
 	Vector vec = CreateVector(v, 3);
 
-	printf("%f\n", ComputeNorm(vec));
+	AddToVector(vec, 15.0);
+
+	PrintVector(vec);
+	printf("%f\n", VectorMax(vec));
 }

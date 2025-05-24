@@ -36,6 +36,25 @@ double VectorSum(Vector v) {
 	return sum;
 }
 
+double VectorMax(Vector v) {
+	assert(v.data);
+
+	double max = v.data[0];
+
+	for (int i = 1; i < v.size; i++)
+		if (v.data[i] > max)
+			max = v.data[i];
+
+	return max;
+}
+
+void AddToVector(Vector v, double x) {
+	assert(v.data);
+
+	for (int i = 0; i < v.size; i++)
+		v.data[i] += x;
+}
+
 Vector AddVectors(Vector v1, Vector v2) {
 	assert(v1.data);
 	assert(v2.data);
