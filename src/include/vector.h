@@ -11,6 +11,9 @@ typedef struct {
 // Initialize a vector with the given elements
 Vector CreateVector(const double* elements, int size);
 
+// Initializes a vector with all elements set to zero
+Vector CreateVectorWithZeros(int size);
+
 // .data field in struct will be initialized with given memory address; ensure
 // object is in scope for less than or equal to the time that elements are in scope
 // and avoid freeing 

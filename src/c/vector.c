@@ -24,6 +24,19 @@ Vector CreateVectorWithElements(double* elements, int size) {
 	return (Vector){.data = elements, .size = size};
 }
 
+Vector CreateVectorWithZeros(int size) {
+	Vector v;
+	v.size = size;
+	v.data = malloc(size * sizeof(double));
+
+	// Not using memset since I am not sure if all bits zero in a double is always zero
+	// on all platforms
+	for (int i = 0; i < size; i++)
+		v.data[i] = 0.0;
+
+	return v;
+}
+
 double VectorSum(Vector v) {
 	assert(v.data);
 

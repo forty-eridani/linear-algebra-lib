@@ -31,6 +31,19 @@ Matrix CreateMatrix(const double* data, int rows, int cols) {
 	return matrix;
 }
 
+Matrix CreateMatrixWithZeros(int rows, int cols) {
+	Matrix m;
+	
+	m.rows = rows;
+	m.cols = cols;
+
+	m.data = malloc(rows * cols * sizeof(double));
+
+	setZero(rows * cols, m.data);
+
+	return m;
+}
+
 Matrix CreateMatrixWithElements(double* data, int rows, int cols) {
 	assert(data);
 
