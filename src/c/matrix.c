@@ -44,6 +44,10 @@ Matrix CreateMatrixWithZeros(int rows, int cols) {
 	return m;
 }
 
+Matrix CreateEmptyMatrix(int rows, int cols) {
+	return (Matrix){.rows = rows, .cols = cols, .data = malloc(rows * cols * sizeof(double))};
+}
+
 Matrix CreateMatrixWithElements(double* data, int rows, int cols) {
 	assert(data);
 

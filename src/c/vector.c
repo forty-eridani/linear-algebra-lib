@@ -37,6 +37,10 @@ Vector CreateVectorWithZeros(int size) {
 	return v;
 }
 
+Vector CreateEmptyVector(int size) {
+	return (Vector){.size = size, .data = malloc(size * sizeof(double))};
+}
+
 double VectorSum(Vector v) {
 	assert(v.data);
 

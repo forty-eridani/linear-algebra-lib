@@ -16,6 +16,9 @@ Matrix CreateMatrix(const double* data, int rows, int cols);
 // Create a matrix with all elements set to zero
 Matrix CreateMatrixWithZeros(int rows, int cols);
 
+// Creates a matrix with uninitialized values
+Matrix CreateEmptyMatrix(int rows, int cols);
+
 // Does not allocate memory for data, instead fills `.data` field in Matrix with
 // given memory address. Do not call `FreeMatrix()` on this object 
 Matrix CreateMatrixWithElements(double* data, int rows, int cols);
