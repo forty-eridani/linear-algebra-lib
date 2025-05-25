@@ -44,6 +44,18 @@ Matrix CreateMatrixWithZeros(int rows, int cols) {
 	return m;
 }
 
+Matrix CreateFilledMatrix(double value, int rows, int cols) {
+	Matrix m;
+	m.rows = rows;
+	m.cols = cols;
+	m.data = malloc(rows * cols * sizeof(double));
+
+	for (int i = 0; i < rows * cols; i++)
+		m.data[i] = value;
+
+	return m;
+}
+
 Matrix CreateEmptyMatrix(int rows, int cols) {
 	return (Matrix){.rows = rows, .cols = cols, .data = malloc(rows * cols * sizeof(double))};
 }

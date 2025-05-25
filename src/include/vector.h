@@ -17,6 +17,9 @@ Vector CreateVectorWithZeros(int size);
 // Creates a vector with unitialized values
 Vector CreateEmptyVector(int size);
 
+// Creates a vector filled with a given value
+Vector CreateFilledVector(double value, int size);
+
 // .data field in struct will be initialized with given memory address; ensure
 // object is in scope for less than or equal to the time that elements are in scope
 // and avoid freeing 

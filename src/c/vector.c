@@ -37,6 +37,17 @@ Vector CreateVectorWithZeros(int size) {
 	return v;
 }
 
+Vector CreateFilledVector(double value, int size) {
+	Vector v;
+	v.size = size;
+	v.data = malloc(size * sizeof(double));
+
+	for (int i = 0; i < size; i++)
+		v.data[i] = value;
+
+	return v;
+}
+
 Vector CreateEmptyVector(int size) {
 	return (Vector){.size = size, .data = malloc(size * sizeof(double))};
 }

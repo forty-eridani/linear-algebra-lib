@@ -19,6 +19,9 @@ Matrix CreateMatrixWithZeros(int rows, int cols);
 // Creates a matrix with uninitialized values
 Matrix CreateEmptyMatrix(int rows, int cols);
 
+// Creates a matrix filled with a given value
+Matrix CreateFilledMatrix(double value, int rows, int cols);
+
 // Does not allocate memory for data, instead fills `.data` field in Matrix with
 // given memory address. Do not call `FreeMatrix()` on this object 
 Matrix CreateMatrixWithElements(double* data, int rows, int cols);
