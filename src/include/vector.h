@@ -29,6 +29,9 @@ double VectorSum(Vector v);
 // the vector element as an arg to the function
 void ApplyFunctionToVector(Vector v, double (*fn)(double));
 
+// Creates a new vector with the function applied to the original vector
+Vector CreateVectorWithAppliedFunction(Vector v, double (*fn)(double));
+
 // Returns the largest element in a vector
 double VectorMax(Vector v);
 

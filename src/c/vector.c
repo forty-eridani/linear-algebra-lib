@@ -46,6 +46,15 @@ void ApplyFunctionToVector(Vector v, double (*fn)(double)) {
 		v.data[i] = fn(v.data[i]);
 }
 
+Vector CreateVectorWithAppliedFunction(Vector v, double (*fn)(double)) {
+	double arr[v.size];
+
+	for (int i = 0; i < v.size; i++)
+		arr[i] = fn(v.data[i]);
+
+	return CreateVector(arr, v.size);
+}
+
 double VectorSum(Vector v) {
 	assert(v.data);
 
