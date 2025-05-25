@@ -191,7 +191,7 @@ void MultiplyVectorsInPlace(Vector v1, Vector* v2) {
 	}
 }
 
-Vector ApplyScalar(Vector vector, double scalar) {
+Vector ApplyScalarToVector(Vector vector, double scalar) {
 	assert(vector.data);
 
 	Vector result = CreateVector(vector.data, vector.size);
