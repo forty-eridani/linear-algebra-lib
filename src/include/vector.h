@@ -25,6 +25,10 @@ Vector CreateVectorWithElements(double* elements, int size);
 // Computes the sum of all elements in the vector
 double VectorSum(Vector v);
 
+// Applies a given function to every element to a vector taking in
+// the vector element as an arg to the function
+void ApplyFunctionToVector(Vector v, double (*fn)(double));
+
 // Returns the largest element in a vector
 double VectorMax(Vector v);
 

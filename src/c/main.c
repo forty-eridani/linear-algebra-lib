@@ -2,6 +2,10 @@
 
 #include <stdio.h>
 
+double multByTwo(double x) {
+	return x * 2;
+}
+
 int main() {
 	const double v[] = {
 		1,
@@ -11,7 +15,7 @@ int main() {
 
 	Vector vec = CreateVector(v, 3);
 
-	AddToVector(vec, 15.0);
+	ApplyFunctionToVector(vec, &multByTwo);
 
 	PrintVector(vec);
 	printf("%f\n", VectorMax(vec));

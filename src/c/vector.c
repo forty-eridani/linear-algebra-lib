@@ -41,6 +41,11 @@ Vector CreateEmptyVector(int size) {
 	return (Vector){.size = size, .data = malloc(size * sizeof(double))};
 }
 
+void ApplyFunctionToVector(Vector v, double (*fn)(double)) {
+	for (int i = 0; i < v.size; i++)
+		v.data[i] = fn(v.data[i]);
+}
+
 double VectorSum(Vector v) {
 	assert(v.data);
 
